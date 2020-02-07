@@ -10,7 +10,7 @@ let AddExpenses = ({ generalSum, dispatch }) => {
   const addExpenseToList = () => {
     dispatch(addExpenses(Number(expenseValue.value), expenseName.value));
   }
-  if (typeof generalSum === "number"){
+  if (typeof generalSum === "number" && !isNaN(generalSum)){
     return (
       <div>
         <h3>

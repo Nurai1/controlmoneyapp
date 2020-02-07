@@ -6,7 +6,7 @@ export const ADD_GENERAL_SUM="ADD_GENERAL_SUM"
 
 // ACTION CREATORS
 
-export function addExpenses(  value, name) {
+export function addExpenses( value, name) {
   return { type: ADD_EXPENSES, value, name }
 }
 

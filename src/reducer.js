@@ -11,11 +11,13 @@ const controlmoney = function (state = {}, action) {
     case ADD_GENERAL_SUM:
       return {
           generalSum: action.value,
+          currentSum: action.value,
           expenses: []
         }
     case ADD_EXPENSES:
       return {
-          generalSum: state.generalSum - action.value,
+          generalSum: state.generalSum,
+          currentSum: state.currentSum - action.value,
           expenses: [
             ...state.expenses,
             {
@@ -29,6 +31,7 @@ const controlmoney = function (state = {}, action) {
     case ADD_PURCHASE:
       return {
           generalSum: state.generalSum - action.value,
+          currentSum: state.currentSum - action.value,
           expenses: state.expenses.map((expense) => {
             if (action.expenseId === expense.id){
               return {

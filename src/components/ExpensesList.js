@@ -13,7 +13,7 @@ let ExpensesList = ({ expensesList }) => {
               <NavLink
                 exact
                 to={`/${expense.id}`}>
-                На {expense.name} осталось {expense.value} рублей
+                На категорию "{expense.name}" осталось {expense.value} рублей
               </NavLink>
             </li>
           )

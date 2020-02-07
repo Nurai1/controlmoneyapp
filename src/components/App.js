@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from './Header'
-import AddExpenses from '../containers/AddExpenses'
+import AddExpenses from './AddExpenses'
 import ExpensesList from './ExpensesList'
 
 function App() {
