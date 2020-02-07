@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Header from './Header'
-import AddExpenses from './AddExpenses'
-import ExpensesList from './ExpensesList'
+import Topbar from './Topbar';
+import AddExpenses from './AddExpenses';
+import ExpensesList from './ExpensesList';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Topbar />
       <AddExpenses />
       <ExpensesList />
     </div>

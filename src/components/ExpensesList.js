@@ -1,38 +1,40 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-let ExpensesList = ({ expensesList }) => {
-
-  if (expensesList!==undefined && expensesList.length !== 0){
-    return(
+const ExpensesList = ({ expensesList }) => {
+  if (expensesList !== undefined && expensesList.length !== 0) {
+    return (
       <ul>
-        {expensesList.map((expense, idx) => {
-          return (
-            <li key={idx}>
-              <NavLink
-                exact
-                to={`/${expense.id}`}>
-                На категорию "{expense.name}" осталось {expense.value} рублей
-              </NavLink>
-            </li>
-          )
-        })}
+        {expensesList.map((expense, idx) => (
+          <li key={idx}>
+            <NavLink
+              exact
+              to={`/${expense.id}`}
+            >
+              На категорию &quot;
+              {expense.name}
+              &quot; осталось
+              {' '}
+              {expense.value}
+              {' '}
+              рублей.
+            </NavLink>
+          </li>
+        ))}
       </ul>
-    )
+    );
   }
 
-  return ""
-}
+  return '';
+};
 
-const mapStateToProps = (state) => {
-  return {
-    expensesList: state.expenses
-  }
-}
+const mapStateToProps = (state) => ({
+  expensesList: state.expenses,
+});
 
-ExpensesList = connect(
-  mapStateToProps
+const ExpensesListContainer = connect(
+  mapStateToProps,
 )(ExpensesList);
 
-export default ExpensesList;
+export default ExpensesListContainer;
