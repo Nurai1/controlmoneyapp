@@ -6,7 +6,7 @@ import ExpensesList from './ExpensesList';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App wrapper">
       <Topbar />
       <AddExpenses />
       <ExpensesList />

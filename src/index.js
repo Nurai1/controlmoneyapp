@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 
 import reducer from './reducer';
 import Main from './Main';
+import './styles/main.sass';
 
 const store = createStore(
   reducer,

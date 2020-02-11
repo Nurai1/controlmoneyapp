@@ -13,38 +13,38 @@ const Topbar = ({ generalSum, currentSum, dispatch }) => {
 
   if (isPositiveNumber(generalSum)) {
     return (
-      <div>
-        <h2>Добро пожаловать в Control Money App.</h2>
-        <p>
-          Ваша общая сумма в наличии:
-          {' '}
-          {generalSum}
-          {' '}
-          рублей.
-        </p>
-        <p>
-          Ваша сумма в остатке после вычета категорий:
-          {' '}
-          {currentSum}
-          {' '}
-          рублей.
-        </p>
+      <div className="topbar">
+        <h2 className="topbar__title">Добро пожаловать в Control Money App.</h2>
+        <div className="topbar__counters">
+          <p className="topbar__counter">
+            Ваша общая сумма в наличии
+            <p>(в рублях):</p>
+            <span className="num-count">{generalSum}</span>
+          </p>
+          <p className="topbar__counter">
+            Ваша сумма в остатке после вычета категорий
+            <p>(в рублях):</p>
+            <span className="num-count">{currentSum}</span>
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <h2>Добро пожаловать в Control Money App.</h2>
-      <h3 style={{ color: 'red' }}>
+    <div className="topbar">
+      <h2 className="topbar__title">Добро пожаловать в Control Money App.</h2>
+      <label>
+        Введите сумму, которой вы распологаете.
+        <br />
+        <input ref={(input) => { sumInput = input; }} type="text" />
+        <br />
+      </label>
+      <button type="button" onClick={getGeneralSum}>Начать учет</button>
+      <h3 className="topbar__mistake-text">
         {(generalSum === undefined || isPositiveNumber(generalSum))
           ? '' : 'Пожалуйста, введите корректное число.'}
       </h3>
-      <label htmlFor="generalSum">
-        Введите сумму, которой вы распологаете.
-        <input ref={(input) => { sumInput = input; }} id="generalSum" type="text" />
-      </label>
-      <button type="button" onClick={getGeneralSum}>Начать учет</button>
     </div>
   );
 };

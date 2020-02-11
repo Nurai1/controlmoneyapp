@@ -1,8 +1,8 @@
 import React from 'react';
 
 const PurchasesList = ({ expenseItem }) => (
-  <div>
-    <p>
+  <div className="purchasesList">
+    <p className="purchasesList__info">
       На категорию &quot;
       {expenseItem.name}
       &quot; осталось
@@ -11,19 +11,17 @@ const PurchasesList = ({ expenseItem }) => (
       {' '}
       рублей.
     </p>
-    <table>
-      <td>
+    <table className="purchasesList__table">
+      <tr>
         <th>Название продукта</th>
-        {expenseItem.purchases.map((purchase) => (
-          <tr>{purchase.name}</tr>
-        ))}
-      </td>
-      <td>
         <th>Цена</th>
-        {expenseItem.purchases.map((purchase) => (
-          <tr>{purchase.value}</tr>
-        ))}
-      </td>
+      </tr>
+      {expenseItem.purchases.map((purchase) => (
+        <tr>
+          <td>{purchase.name}</td>
+          <td>{purchase.value}</td>
+        </tr>
+      ))}
     </table>
   </div>
 );

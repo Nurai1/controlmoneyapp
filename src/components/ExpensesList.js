@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const ExpensesList = ({ expensesList }) => {
   if (expensesList !== undefined && expensesList.length !== 0) {
     return (
-      <ul>
+      <ul className="expensesList">
         {expensesList.map((expense, idx) => (
           <li key={idx}>
             <NavLink

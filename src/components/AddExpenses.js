@@ -24,21 +24,25 @@ const AddExpenses = ({
 
   if (isPositiveNumber(generalSum)) {
     return (
-      <div>
-        <h3>
+      <div className="addExpense">
+        <p className="addExpense__info">
           Введите вид товара, на который вы собираетесь тратить деньги и сколько
           вы планируете на него потратить.
-        </h3>
-        <label htmlFor="expense_name">
+        </p>
+        <label>
           Вид товара:
-          <input ref={(input) => { expenseName = input; }} type="text" id="expense_name" />
+          <br />
+          <input ref={(input) => { expenseName = input; }} type="text" />
+          <br />
         </label>
-        <label htmlFor="expense_value">
+        <label>
           Планируемые расходы:
-          <input ref={(input) => { expenseValue = input; }} type="text" id="expense_value" />
+          <br />
+          <input ref={(input) => { expenseValue = input; }} type="text" />
+          <br />
         </label>
         <button type="button" onClick={addExpenseToList}>Добавить расходы</button>
-        <p style={{ color: 'red' }}>
+        <p>
           {isCurrentSumPositive ? ''
             : 'Не хватает средств, чтобы добавить категорию'}
         </p>

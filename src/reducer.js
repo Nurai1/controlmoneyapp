@@ -5,9 +5,9 @@ import {
 } from './actions';
 
 let idCounter = 0;
-let thisPurchase
+let thisExpense;
 
-const controlmoney = function (state = {}, action) {
+const controMoneyApp = (state = {}, action) => {
   switch (action.type) {
     case ADD_GENERAL_SUM:
       return {
@@ -22,9 +22,9 @@ const controlmoney = function (state = {}, action) {
       }
 
       return {
-        generalSum: state.generalSum,
-        currentSum: state.currentSum - action.value,
+        ...state,
         isCurrentSumPositive: true,
+        currentSum: state.currentSum - action.value,
         expenses: [
           ...state.expenses,
           {
@@ -38,20 +38,18 @@ const controlmoney = function (state = {}, action) {
       };
     case ADD_PURCHASE:
       return {
-        currentSum: state.currentSum,
-        isCurrentSumPositive: state.isCurrentSumPositive,
+        ...state,
         expenses: state.expenses.map((expense) => {
           if (action.expenseId === expense.id) {
             if (expense.value - action.value < 0) {
-              thisPurchase = { ...expense, isExpensePositive: false };
-              return thisPurchase;
+              thisExpense = { ...expense, isExpensePositive: false };
+              return thisExpense;
             }
 
-            thisPurchase = {
-              id: expense.id,
+            thisExpense = {
+              ...expense,
               value: expense.value - action.value,
-              name: expense.name,
-              isExpensePositive: expense.isExpensePositive,
+              isExpensePositive: true,
               purchases: [
                 ...expense.purchases,
                 {
@@ -61,11 +59,11 @@ const controlmoney = function (state = {}, action) {
               ],
             };
 
-            return thisPurchase;
+            return thisExpense;
           }
           return expense;
         }),
-        generalSum: thisPurchase.isExpensePositive
+        generalSum: thisExpense.isExpensePositive
           ? (state.generalSum - action.value) : state.generalSum,
       };
     default:
@@ -73,4 +71,4 @@ const controlmoney = function (state = {}, action) {
   }
 };
 
-export default controlmoney;
+export default controMoneyApp;

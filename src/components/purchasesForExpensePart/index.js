@@ -7,7 +7,7 @@ import PurchasesList from './PurchasesList';
 const Purchases = ({ expenseItem }) => {
   if (expenseItem === null) {
     return (
-      <div>
+      <div className="purchases wrapper">
         Это оповещательное сообщение. Хранилище с данными о покупках не имеет
         информации, чтобы ее показать. Скорее всего, вы обновили страницу или
         перешли на поддомен, введя его в поисковой строке.
@@ -19,7 +19,7 @@ const Purchases = ({ expenseItem }) => {
   }
 
   return (
-    <div>
+    <div className="purchases wrapper">
       <AddPurchases expenseItem={expenseItem} />
       <PurchasesList expenseItem={expenseItem} />
     </div>
