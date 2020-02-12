@@ -1,8 +1,4 @@
-// ACTION TYPES
-
-export const ADD_EXPENSES = 'ADD_EXPENSES';
-export const ADD_PURCHASE = 'ADD_PURCHASE';
-export const ADD_GENERAL_SUM = 'ADD_GENERAL_SUM';
+import { ADD_EXPENSES, ADD_PURCHASE, ADD_GENERAL_SUM } from './constants';
 
 // ACTION CREATORS
 

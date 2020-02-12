@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addGeneralSum } from '../actions';
 import { isPositiveNumber } from '../utilities';
 
-const Topbar = ({ generalSum, currentSum, dispatch }) => {
+export const Topbar = ({ generalSum, currentSum, dispatch }) => {
   let sumInput = '';
 
   const getGeneralSum = () => {

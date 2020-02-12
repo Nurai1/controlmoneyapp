@@ -2,12 +2,12 @@ import {
   ADD_EXPENSES,
   ADD_PURCHASE,
   ADD_GENERAL_SUM,
-} from './actions';
+} from './constants';
 
 let idCounter = 0;
 let thisExpense;
 
-const controMoneyApp = (state = {}, action) => {
+const controlMoneyApp = (state = {}, action) => {
   switch (action.type) {
     case ADD_GENERAL_SUM:
       return {
@@ -71,4 +71,4 @@ const controMoneyApp = (state = {}, action) => {
   }
 };
 
-export default controMoneyApp;
+export default controlMoneyApp;
