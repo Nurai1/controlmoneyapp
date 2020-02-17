@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-const ExpensesList = ({ expensesList }) => {
+export const ExpensesList = ({ expensesList }) => {
   if (expensesList !== undefined && expensesList.length !== 0) {
     return (
       <ul className="expensesList">
