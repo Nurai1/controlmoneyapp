@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 
-import reducer from './reducer';
+import reducer from './store/reducer';
 import Main from './Main';
 import './styles/main.sass';
 

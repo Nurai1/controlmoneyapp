@@ -2,7 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-export const ExpensesList = ({ expensesList }) => {
+import {
+  AppState,
+  Expense
+} from '../store/types';
+
+interface ExpensesListProps {
+  expensesList: Expense[]
+}
+
+export const ExpensesList: React.FC<ExpensesListProps> = ({ expensesList }) => {
   if (expensesList !== undefined && expensesList.length !== 0) {
     return (
       <ul className="expensesList">
@@ -26,10 +35,10 @@ export const ExpensesList = ({ expensesList }) => {
     );
   }
 
-  return '';
+  return null;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
   expensesList: state.expenses,
 });
 

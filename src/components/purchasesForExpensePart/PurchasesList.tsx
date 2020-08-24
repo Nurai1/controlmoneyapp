@@ -1,6 +1,12 @@
 import React from 'react';
 
-const PurchasesList = ({ expenseItem }) => (
+import { Expense } from '../../store/types';
+
+type PurchasesListProps = {
+    expenseItem: Expense
+};
+
+const PurchasesList: React.FC<PurchasesListProps> = ({ expenseItem }) => (
   <div className="purchasesList">
     <p className="purchasesList__info">
       На категорию &quot;

@@ -1,13 +1,13 @@
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import pretty from "pretty";
+import React from 'react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
+import pretty from 'pretty';
 
-import { Topbar } from "../../components/Topbar";
+import { Topbar } from '../../components/Topbar';
 
 let container = null;
 beforeEach(() => {
-  container = document.createElement("div");
+  container = document.createElement('div');
   document.body.appendChild(container);
 });
 
@@ -17,7 +17,7 @@ afterEach(() => {
   container = null;
 });
 
-it("renders initial or full-logic page", () => {
+it('renders initial or full-logic page', () => {
   act(() => {
     render(<Topbar />, container);
   });

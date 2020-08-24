@@ -1,25 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addExpenses } from '../actions';
-import { isPositiveNumber } from '../utilities';
+import { addExpenses } from '../store/actions';
+import { isPositiveNumber } from '../utils/isPositiveNum';
 
-const AddExpenses = ({
+import {
+    AppState,
+    addExpenseAction,
+    ExpensePayload
+} from '../store/types';
+
+interface AddExpensesProps {
+    generalSum: number,
+        isCurrentSumPositive: boolean,
+        addExpenses: (payload: ExpensePayload) => addExpenseAction,
+}
+
+const AddExpenses: React.FC<AddExpensesProps> = ({
   generalSum,
   isCurrentSumPositive,
-  dispatch,
+                                                     addExpenses,
 }) => {
-  let expenseName = '';
-  let expenseValue = '';
+  let expenseName: HTMLInputElement | null = null;
+  let expenseValue: HTMLInputElement | null = null;
 
   const addExpenseToList = () => {
-    if (expenseName.value.trim() === '' || expenseValue.value.trim() === ''
-        || !isPositiveNumber(expenseValue.value)) { return; }
+    if ((expenseName as HTMLInputElement).value.trim() === '' || (expenseValue as HTMLInputElement).value.trim() === ''
+        || !isPositiveNumber((expenseValue as HTMLInputElement).value)) { return; }
 
-    dispatch(addExpenses(Number(expenseValue.value), expenseName.value));
+    addExpenses({ value: Number((expenseValue as HTMLInputElement).value), name: (expenseName as HTMLInputElement).value });
 
-    expenseName.value = '';
-    expenseValue.value = '';
+      (expenseName as HTMLInputElement).value = '';
+      (expenseValue as HTMLInputElement).value = '';
   };
 
   if (isPositiveNumber(generalSum)) {
@@ -50,16 +62,21 @@ const AddExpenses = ({
     );
   }
 
-  return '';
+  return null;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
   generalSum: state.generalSum,
   isCurrentSumPositive: state.isCurrentSumPositive,
 });
 
+const mapDispatchToProps = {
+    addExpenses
+};
+
 const AddExpensesContainer = connect(
   mapStateToProps,
+    mapDispatchToProps
 )(AddExpenses);
 
 export default AddExpensesContainer;

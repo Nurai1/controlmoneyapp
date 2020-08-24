@@ -1,10 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 
 import AddPurchases from './AddPurchases';
 import PurchasesList from './PurchasesList';
 
-const Purchases = ({ expenseItem }) => {
+import {
+    AppState,
+    Expense
+} from '../../store/types';
+
+type PurchasesProps = {
+    expenseItem: Expense | null
+};
+
+const Purchases: React.FC<PurchasesProps> = ({ expenseItem }) => {
   if (expenseItem === null) {
     return (
       <div className="purchases wrapper">
@@ -26,16 +36,13 @@ const Purchases = ({ expenseItem }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  if (state.expenses === undefined) {
-    return {
-      expenseItem: null,
-    };
-  }
-  return {
-    expenseItem: state.expenses.find((item) => item.id === Number(ownProps.match.params.expenseId)),
-  };
+type purchaseOwnProps = {
+    expenseId: string
 };
+
+const mapStateToProps = (state: AppState, ownProps: RouteComponentProps<purchaseOwnProps>) => ({
+    expenseItem: state.expenses.find((item: Expense) => item.id === Number(ownProps.match.params.expenseId)) || null,
+  });
 
 const PurchasesContainer = connect(
   mapStateToProps,

@@ -1,5 +1,5 @@
-import reducer from '../reducer';
-import * as actions from '../actions';
+import reducer from '../store/reducer';
+import * as actions from '../store/actions';
 
 describe('reducer', () => {
   const initSum = 50000;
@@ -30,16 +30,16 @@ describe('reducer', () => {
   it('should create an initial store with general sum', () => {
     expect(reducer(
       {},
-      actions.addGeneralSum(initSum)
+      actions.addGeneralSum(initSum),
     )).toEqual(initStore);
   });
 
   it('should create store with expense list', () => {
     expect(reducer(
       initStore,
-      actions.addExpenses(testExpenseVal, testExpenseName)
+      actions.addExpenses(testExpenseVal, testExpenseName),
     )).toEqual(expectedStoreAfterAddedExp);
-  })
+  });
 
   it('should create store with purchase list in expense item', () => {
     const testId = 1;
@@ -57,14 +57,14 @@ describe('reducer', () => {
               value: testPurchaseVal,
               name: testPurchaseName,
             }],
-          }
+          };
         }
         return exp;
-      })
+      }),
     };
     expect(reducer(
       expectedStoreAfterAddedExp,
-      actions.addPurchase(testId, testPurchaseVal, testPurchaseName)
+      actions.addPurchase(testId, testPurchaseVal, testPurchaseName),
     )).toEqual(expectedStore);
-  })
+  });
 });

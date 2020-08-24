@@ -1,5 +1,5 @@
-import * as actions from '../actions';
-import * as types from '../constants';
+import * as actions from '../store/actions';
+import * as types from '../store/constants';
 
 describe('actions', () => {
   it('should create an action to add general sum', () => {
@@ -7,7 +7,7 @@ describe('actions', () => {
     const expectedGeneralSum = {
       type: types.ADD_GENERAL_SUM,
       value,
-    }
+    };
     expect(actions.addGeneralSum(value)).toEqual(expectedGeneralSum);
   });
 
@@ -18,7 +18,7 @@ describe('actions', () => {
       type: types.ADD_EXPENSES,
       value,
       name,
-    }
+    };
     expect(actions.addExpenses(value, name)).toEqual(expectedExpense);
   });
 
@@ -31,7 +31,7 @@ describe('actions', () => {
       expenseId,
       value,
       name,
-    }
+    };
     expect(actions.addPurchase(expenseId, value, name)).toEqual(expectedPurchase);
   });
 });

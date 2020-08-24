@@ -4,7 +4,7 @@ import Topbar from './Topbar';
 import AddExpenses from './AddExpenses';
 import ExpensesList from './ExpensesList';
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="App wrapper">
       <Topbar />

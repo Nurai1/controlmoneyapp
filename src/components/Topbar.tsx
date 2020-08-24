@@ -1,14 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addGeneralSum } from '../actions';
-import { isPositiveNumber } from '../utilities';
+import { addGeneralSum } from '../store/actions';
+import { isPositiveNumber } from '../utils/isPositiveNum';
 
-export const Topbar = ({ generalSum, currentSum, dispatch }) => {
-  let sumInput = '';
+import {
+    addGeneralSumAction,
+    AppState
+} from '../store/types';
+
+interface TopbarProps {
+    generalSum: number;
+    currentSum: number;
+    addGeneralSum: (value: number) => addGeneralSumAction;
+}
+
+export const Topbar: React.FC<TopbarProps> = ({ generalSum, currentSum, addGeneralSum }) => {
+  let sumInput: HTMLInputElement | null = null;
 
   const getGeneralSum = () => {
-    dispatch(addGeneralSum(Number(sumInput.value)));
+      console.log('nahagahs');
+      addGeneralSum(Number((sumInput as HTMLInputElement).value));
   };
 
   if (isPositiveNumber(generalSum)) {
@@ -49,13 +61,18 @@ export const Topbar = ({ generalSum, currentSum, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppState) => ({
   generalSum: state.generalSum,
   currentSum: state.currentSum,
 });
 
+const mapDispatchToProps = {
+        addGeneralSum
+    };
+
 const TopbarContainer = connect(
   mapStateToProps,
+    mapDispatchToProps,
 )(Topbar);
 
 export default TopbarContainer;
