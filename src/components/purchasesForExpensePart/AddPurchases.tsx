@@ -36,7 +36,8 @@ const AddPurchases: React.FC<AddPurchaseProps> = ({ expenseItem, addPurchase }) 
   return (
     <div className="addPurchase">
       <h3>
-        Введите ваши покупки в категории &quot;
+        Введите ваши покупки в категории
+        &quot;
         {expenseItem.name}
         &quot;.
       </h3>
