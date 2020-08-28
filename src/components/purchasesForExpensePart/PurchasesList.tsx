@@ -1,22 +1,43 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { Expense } from '../../store/types';
+import { Expense, AppState } from '../../store/types';
 
 type PurchasesListProps = {
-    expenseItem: Expense
+    expenseItem: Expense,
+    days: number,
 };
 
-const PurchasesList: React.FC<PurchasesListProps> = ({ expenseItem }) => (
+const PurchasesList: React.FC<PurchasesListProps> = ({ expenseItem, days }) => (
   <div className="purchasesList">
-    <p className="purchasesList__info">
-      На категорию &quot;
-      {expenseItem.name}
-      &quot; осталось
-      {' '}
-      {expenseItem.value}
-      {' '}
-      рублей.
-    </p>
+    {expenseItem.everyDayExpenseValue ?
+      <div>
+      <p className="purchasesList__info">
+        На {days} дней осталось
+        {' '}
+        {expenseItem.value}
+        {' '}
+        рублей.
+      </p>
+      <p className="purchasesList__info">
+        На сегодня выделено
+        {' '}
+        {expenseItem.currentDayExpenseValue}
+        {' '}
+        рублей.
+      </p>
+      </div>
+      :
+      <p className="purchasesList__info">
+        На категорию &quot;
+        {expenseItem.name}
+        &quot; осталось
+        {' '}
+        {expenseItem.value}
+        {' '}
+        рублей.
+      </p>
+    }
     <table className="purchasesList__table">
       <tr>
         <th>Название продукта</th>
@@ -32,4 +53,10 @@ const PurchasesList: React.FC<PurchasesListProps> = ({ expenseItem }) => (
   </div>
 );
 
-export default PurchasesList;
+const mapState = (state: AppState) => ({
+  days: state.days,
+})
+
+const PurchasesListContainer = connect(mapState)(PurchasesList)
+
+export default PurchasesListContainer;

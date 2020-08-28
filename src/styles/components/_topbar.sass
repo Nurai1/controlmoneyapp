@@ -12,13 +12,18 @@
 .topbar__counters
   display: flex
   justify-content: space-around
+  flex-wrap: wrap
 
 .topbar__counter
   width: 40%
   min-width: 160px
 
+.num-count
+  font-size: 42px
+  color: $title-font-color
+  display: block
+  margin: 5px
+
+@media screen and (max-width: 800px)
   .num-count
-    font-size: 42px
-    color: $title-font-color
-    display: block
-    margin: 5px
+    font-size: 32px

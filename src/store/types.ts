@@ -1,18 +1,25 @@
 import {
     ADD_EXPENSES,
     ADD_PURCHASE,
-    ADD_GENERAL_SUM,
+    ADD_INITIAL_VALUES,
+    DECREMENT_AMOUNT_OF_DAYS,
 } from './constants';
 
 export interface ExpensePayload {
     value: number;
     name: string;
+    everyDayExpenseValue: number | null;
 }
 
 export interface PurchasePayload {
     expenseId: number;
     value: number;
     name: string;
+}
+
+export interface initialValuesPayload {
+    value: number;
+    days: number;
 }
 
 export type addExpenseAction = {
@@ -25,12 +32,16 @@ export interface addPurchaseAction {
     payload: PurchasePayload;
 }
 
-export interface addGeneralSumAction {
-    type: typeof ADD_GENERAL_SUM;
-    value: number;
+export interface addInitialValuesAction {
+    type: typeof ADD_INITIAL_VALUES;
+    payload: initialValuesPayload;
 }
 
-export type appActionTypes = addExpenseAction | addPurchaseAction | addGeneralSumAction
+export type decrementAmountOfDaysAction = {
+    type: typeof DECREMENT_AMOUNT_OF_DAYS;
+}
+
+export type appActionTypes = addExpenseAction | addPurchaseAction | addInitialValuesAction | decrementAmountOfDaysAction
 
 export interface Purchase {
     value: number;
@@ -42,12 +53,15 @@ export interface Expense {
     value: number;
     name: string;
     isExpensePositive: boolean;
+    everyDayExpenseValue: number | null;
+    currentDayExpenseValue?: number | null;
     purchases: Purchase[];
 }
 
 export interface AppState {
     generalSum: number;
     currentSum: number;
+    days: number;
     isCurrentSumPositive: boolean;
     expenses: Expense[];
 }

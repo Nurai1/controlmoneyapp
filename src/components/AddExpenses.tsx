@@ -11,49 +11,58 @@ import {
 } from '../store/types';
 
 interface AddExpensesProps {
-    generalSum: number,
-        isCurrentSumPositive: boolean,
-        addExpenses: (payload: ExpensePayload) => addExpenseAction,
+  generalSum: number,
+  isCurrentSumPositive: boolean,
+  days: number,
+  addExpenses: (payload: ExpensePayload) => addExpenseAction,
 }
 
 const AddExpenses: React.FC<AddExpensesProps> = ({
   generalSum,
   isCurrentSumPositive,
-                                                     addExpenses,
+  days,
+  addExpenses,
 }) => {
   let expenseName: HTMLInputElement | null = null;
   let expenseValue: HTMLInputElement | null = null;
+  let everyDayExpenseValue: HTMLInputElement | null = null;
 
   const addExpenseToList = () => {
+    console.dir((everyDayExpenseValue as HTMLInputElement))
     if ((expenseName as HTMLInputElement).value.trim() === '' || (expenseValue as HTMLInputElement).value.trim() === ''
         || !isPositiveNumber((expenseValue as HTMLInputElement).value)) { return; }
-
-    addExpenses({ value: Number((expenseValue as HTMLInputElement).value), name: (expenseName as HTMLInputElement).value });
+    addExpenses({
+      value: Number((expenseValue as HTMLInputElement).value),
+      name: (expenseName as HTMLInputElement).value,
+      everyDayExpenseValue: ((everyDayExpenseValue as HTMLInputElement).checked ? Number((expenseValue as HTMLInputElement).value)/days : null),
+    });
 
       (expenseName as HTMLInputElement).value = '';
       (expenseValue as HTMLInputElement).value = '';
   };
 
-  if (isPositiveNumber(generalSum)) {
+  if (isPositiveNumber(generalSum) && isPositiveNumber(days)) {
     return (
       <div className="addExpense">
         <p className="addExpense__info">
           Введите вид товара, на который вы собираетесь тратить деньги и сколько
           вы планируете на него потратить.
         </p>
-        <label>
-          Вид товара:
-          <br />
-          <input ref={(input) => { expenseName = input; }} type="text" />
-          <br />
-        </label>
-        <label>
-          Планируемые расходы:
-          <br />
-          <input ref={(input) => { expenseValue = input; }} type="text" />
-          <br />
-        </label>
-        <button type="button" onClick={addExpenseToList}>Добавить расходы</button>
+        <div className="addExpense__fields-wrapper">
+          <label className="addExpense__field">
+            <span className="addExpense__field__title">Вид товара:</span>
+            <input ref={(input) => { expenseName = input; }} type="text" />
+          </label>
+          <label className="addExpense__field">
+            <span className="addExpense__field__title">Планируемые расходы:</span>
+            <input ref={(input) => { expenseValue = input; }} type="text" />
+          </label>
+          <label className="addExpense__field">
+            <span className="addExpense__field__title">Каждодневная трата:</span>
+            <input ref={(input) => { everyDayExpenseValue = input; }} type="checkbox" />
+          </label>
+        </div>
+        <button className="addExpense__btn" type="button" onClick={addExpenseToList}>Добавить расходы</button>
         <p>
           {isCurrentSumPositive ? ''
             : 'Не хватает средств, чтобы добавить категорию'}
@@ -68,6 +77,7 @@ const AddExpenses: React.FC<AddExpensesProps> = ({
 const mapStateToProps = (state: AppState) => ({
   generalSum: state.generalSum,
   isCurrentSumPositive: state.isCurrentSumPositive,
+  days: state.days
 });
 
 const mapDispatchToProps = {
