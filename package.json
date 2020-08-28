@@ -1,6 +1,7 @@
 {
   "name": "controlmoneyapp",
   "version": "0.1.0",
+  "eslintIgnore": ["build/"],
   "private": true,
   "homepage": "https://nurai1.github.io/controlmoneyapp/build",
   "dependencies": {
