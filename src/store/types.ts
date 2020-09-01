@@ -3,6 +3,7 @@ import {
     ADD_PURCHASE,
     ADD_INITIAL_VALUES,
     DECREMENT_AMOUNT_OF_DAYS,
+    ADD_LAST_LOGIN_DATE,
 } from './constants';
 
 export interface ExpensePayload {
@@ -39,9 +40,20 @@ export interface addInitialValuesAction {
 
 export type decrementAmountOfDaysAction = {
     type: typeof DECREMENT_AMOUNT_OF_DAYS;
+    value: number;
 }
 
-export type appActionTypes = addExpenseAction | addPurchaseAction | addInitialValuesAction | decrementAmountOfDaysAction
+export type addLastLoginDateAction = {
+    type: typeof ADD_LAST_LOGIN_DATE;
+    value: number |  null;
+}
+
+export type appActionTypes =
+  addExpenseAction |
+  addPurchaseAction |
+  addInitialValuesAction |
+  decrementAmountOfDaysAction |
+  addLastLoginDateAction
 
 export interface Purchase {
     value: number;
@@ -62,6 +74,7 @@ export interface AppState {
     generalSum: number;
     currentSum: number;
     days: number;
+    lastLoginDate: number | null;
     isCurrentSumPositive: boolean;
     expenses: Expense[];
 }
