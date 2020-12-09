@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 
 import Topbar from './Topbar';
@@ -6,29 +6,36 @@ import AddExpenses from './AddExpenses';
 import ExpensesList from './ExpensesList';
 import RefreshButton from './RefreshButton';
 
-import { decrementAmountOfDays } from '../store/actions';
+import { decrementAmountOfDays, addLastLoginDate } from '../store/actions';
 
 import {
+  AppState,
   decrementAmountOfDaysAction,
+  addLastLoginDateAction,
 } from '../store/types';
 
 interface AppProps {
-  decrementAmountOfDays: () => decrementAmountOfDaysAction,
+  lastLoginDate: number | null,
+  decrementAmountOfDays: (value: number) => decrementAmountOfDaysAction,
+  addLastLoginDate: (value: number | null) => addLastLoginDateAction
 }
 
-function App({ decrementAmountOfDays }: AppProps): JSX.Element {
-
-  // const [lastLoginDate, setLastLoginDate] = useState<number>(0);
-
-  const checkTime = () => {
-    if (new Date().getHours()+"" === '05') {
-      decrementAmountOfDays();
-    }
-  }
+function App({
+  lastLoginDate,
+  decrementAmountOfDays,
+  addLastLoginDate
+}: AppProps): JSX.Element {
 
   useEffect(() => {
-    const intervalId = setInterval(checkTime, 3600000);
-    return () => clearInterval(intervalId);
+    console.log('lld: '+ lastLoginDate);
+
+    const loginDate: number = new Date().getTime() / (24 * 60 * 60 * 1000);
+    console.log('ld: ' + loginDate);
+
+    if (lastLoginDate && lastLoginDate !== loginDate) {
+      decrementAmountOfDays(parseInt((loginDate - (lastLoginDate as number)).toFixed(), 10));
+    }
+    return () => { addLastLoginDate(loginDate); }
   }, []);
 
   return (
@@ -43,12 +50,17 @@ function App({ decrementAmountOfDays }: AppProps): JSX.Element {
   );
 }
 
+const mapState = (state: AppState) => ({
+  lastLoginDate: state.lastLoginDate,
+});
+
 const mapDispatchToProps = {
   decrementAmountOfDays,
+  addLastLoginDate,
 };
 
 const AppContainer = connect(
-  null,
+  mapState,
   mapDispatchToProps,
 )(App);
 

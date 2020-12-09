@@ -1,4 +1,10 @@
-import { ADD_EXPENSES, ADD_PURCHASE, ADD_INITIAL_VALUES, DECREMENT_AMOUNT_OF_DAYS } from './constants';
+import {
+  ADD_EXPENSES,
+  ADD_PURCHASE,
+  ADD_INITIAL_VALUES,
+  DECREMENT_AMOUNT_OF_DAYS,
+  ADD_LAST_LOGIN_DATE,
+} from './constants';
 import {
   addExpenseAction,
   addPurchaseAction,
@@ -7,6 +13,7 @@ import {
   ExpensePayload,
   PurchasePayload,
   initialValuesPayload,
+  addLastLoginDateAction,
 } from './types';
 
 // ACTION CREATORS
@@ -26,8 +33,10 @@ export function addInitialValues(payload: initialValuesPayload): addInitialValue
   return { type: ADD_INITIAL_VALUES, payload };
 }
 
-export function decrementAmountOfDays(): decrementAmountOfDaysAction {
-  return { type: DECREMENT_AMOUNT_OF_DAYS };
+export function decrementAmountOfDays(value: number): decrementAmountOfDaysAction {
+  return { type: DECREMENT_AMOUNT_OF_DAYS, value };
 }
 
-
+export function addLastLoginDate(value: number | null): addLastLoginDateAction {
+  return { type: ADD_LAST_LOGIN_DATE, value }
+}

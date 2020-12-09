@@ -3,6 +3,7 @@ import {
   ADD_PURCHASE,
   ADD_INITIAL_VALUES,
   DECREMENT_AMOUNT_OF_DAYS,
+  ADD_LAST_LOGIN_DATE,
 } from './constants';
 
 import {
@@ -18,6 +19,7 @@ export const initialState: AppState = {
   generalSum: 0,
   currentSum: 0,
   days: 0,
+  lastLoginDate: null,
   isCurrentSumPositive: true,
   expenses: [],
 };
@@ -26,11 +28,10 @@ const controlMoneyApp = (state: AppState = initialState, action: appActionTypes)
   switch (action.type) {
     case ADD_INITIAL_VALUES:
       return {
+        ...state,
         generalSum: action.payload.value,
         currentSum: action.payload.value,
         days: action.payload.days,
-        isCurrentSumPositive: true,
-        expenses: [],
       };
     case ADD_EXPENSES:
       if (state.currentSum - action.payload.value < 0) {
@@ -88,17 +89,23 @@ const controlMoneyApp = (state: AppState = initialState, action: appActionTypes)
     case DECREMENT_AMOUNT_OF_DAYS:
       return {
         ...state,
-        days: state.days - 1,
+        days: state.days - action.value,
         expenses: state.expenses.map((expense) => {
           if (expense.everyDayExpenseValue && expense.currentDayExpenseValue) {
             return {
               ...expense,
-              currentDayExpenseValue: expense.currentDayExpenseValue + expense.everyDayExpenseValue,
+              currentDayExpenseValue: expense.currentDayExpenseValue +
+                expense.everyDayExpenseValue * action.value,
             };
           }
           return expense;
         }),
       };
+      case ADD_LAST_LOGIN_DATE:
+        return {
+          ...state,
+          lastLoginDate: action.value,
+        };
     default:
       return state;
   }
