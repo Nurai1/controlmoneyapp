@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/controlmoneyapp/build/precache-manifest.8b9ba5a496018dd6827cf22cf3420bde.js"
+  "/controlmoneyapp/build/precache-manifest.1e0943e3f4a0d2294a85758305b6029a.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -18,8 +18,8 @@ export const ExpensesList: React.FC<ExpensesListProps> = ({ expensesList }) => {
         {expensesList.map((expense, idx) => (
           <li key={idx}>
             <NavLink
-              exact
-              to={`/${expense.id}`}
+                exact
+                to={`/${expense.id}`}
             >
               На категорию &quot;
               {expense.name}

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from "react-redux";
 
 import Topbar from './Topbar';
@@ -17,6 +17,8 @@ interface AppProps {
 }
 
 function App({ decrementAmountOfDays }: AppProps): JSX.Element {
+
+  // const [lastLoginDate, setLastLoginDate] = useState<number>(0);
 
   const checkTime = () => {
     if (new Date().getHours()+"" === '05') {
